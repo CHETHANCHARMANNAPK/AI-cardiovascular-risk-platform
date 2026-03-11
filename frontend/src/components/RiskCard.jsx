@@ -98,49 +98,51 @@ export default function RiskCard({ result, modelInfo }) {
   const explanation = result.explanation;
   const contributions = explanation?.contributions;
 
-  const confidence = isPositive
-    ? probability
-    : 100 - probability;
-
-  const topFactors = contributions
-    ? Object.entries(contributions).slice(0, 5).map(([raw, val]) => [raw, val, friendlyName(raw)])
-    : [];
-
-  const maxAbsVal = topFactors.length
-    ? Math.max(...topFactors.map(([, v]) => Math.abs(v)))
-    : 1;
-
+  const confidence = isPositive ? probability : 100 - probability;
+  const topFactors = contributions ? Object.entries(contributions).slice(0, 5).map(([raw, val]) => [raw, val, friendlyName(raw)]) : [];
+  const maxAbsVal = topFactors.length ? Math.max(...topFactors.map(([, v]) => Math.abs(v))) : 1;
   const riskLevel = probability >= 70 ? "HIGH" : probability >= 40 ? "MEDIUM" : "LOW";
   const riskColor = probability >= 70 ? "var(--danger)" : probability >= 40 ? "#f39c12" : "var(--success)";
-
   const recommendations = generateRecommendations(topFactors);
   const preventiveActions = generatePreventiveActions(topFactors);
   const timeline = estimateTimeline(probability);
-
   const algoName = modelInfo?.algorithm || "Random Forest Classifier";
   const algoAccuracy = modelInfo?.accuracy || "~86%";
   const datasetDesc = modelInfo?.studyBox?.badge || "Clinical cardiovascular datasets";
+
+  // Model-specific labels
+  let mainLabel = "";
+  let description = "";
+  if (model === "heart") {
+    mainLabel = isPositive ? "Heart Disease Detected" : "No Heart Disease";
+    description = isPositive
+      ? "The AI model indicates presence of heart disease based on clinical parameters. Further medical evaluation is recommended."
+      : "The AI model indicates no heart disease based on the provided inputs. Continue routine check-ups and healthy lifestyle.";
+  } else if (model === "framingham") {
+    mainLabel = isPositive ? "High 10-Year CHD Risk" : "Low 10-Year CHD Risk";
+    description = isPositive
+      ? "The AI model estimates a high probability of developing coronary heart disease within 10 years. Lifestyle changes and medical follow-up are recommended."
+      : "The AI model estimates a low probability of developing coronary heart disease within 10 years. Maintain healthy lifestyle.";
+  } else if (model === "cardiac") {
+    mainLabel = isPositive ? "Cardiac Failure Risk Detected" : "No Cardiac Failure Risk";
+    description = isPositive
+      ? "The AI model predicts elevated risk of cardiac failure. Immediate clinical evaluation is recommended."
+      : "The AI model predicts low risk of cardiac failure. Continue regular check-ups and healthy habits.";
+  } else {
+    mainLabel = isPositive ? "Elevated Cardiovascular Risk Detected" : "Low Cardiovascular Risk Indicated";
+    description = isPositive
+      ? "Elevated cardiovascular risk detected. Further medical evaluation is recommended."
+      : "Low cardiovascular risk indicated. Continue routine check-ups and healthy lifestyle.";
+  }
 
   return (
     <>
       <div className={`risk-card ${isPositive ? "risk-high" : "risk-low"}`}>
         <div className="risk-icon">{isPositive ? "⚠️" : "✅"}</div>
-        <h3 className="risk-label">
-          {isPositive
-            ? "Elevated Cardiovascular Risk Detected"
-            : "Low Cardiovascular Risk Indicated"}
-        </h3>
-        <div className="probability-badge" style={{ background: riskColor }}>
-          {probability}% Probability
-        </div>
-        <p className="risk-detail">
-          Prediction: <strong>{isPositive ? "Positive (1)" : "Negative (0)"}</strong>
-        </p>
-        <p className="risk-description">
-          {isPositive
-            ? "The AI model indicates elevated cardiovascular risk based on the provided clinical parameters. Further medical evaluation is recommended."
-            : "The AI model indicates low cardiovascular risk based on the provided inputs. Continue routine check-ups and healthy lifestyle."}
-        </p>
+        <h3 className="risk-label">{mainLabel}</h3>
+        <div className="probability-badge" style={{ background: riskColor }}>{probability}% Probability</div>
+        <p className="risk-detail">Prediction: <strong>{isPositive ? "Positive (1)" : "Negative (0)"}</strong></p>
+        <p className="risk-description">{description}</p>
       </div>
 
       <div className="gauge-card">

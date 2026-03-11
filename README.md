@@ -1,26 +1,55 @@
-# Cardio AI Platform
+# AI Cardiovascular Risk Platform
 
-AI-powered cardiovascular disease prediction and ECG anomaly detection platform.
+## Overview
+AI platform for predicting cardiovascular disease risk using multiple ML models.
 
 ## Features
+- Heart disease prediction
+- Framingham 10-year CHD risk
+- Cardiac failure prediction
+- ECG anomaly detection
+- Global cardiovascular risk scoring
 
-- **Heart Disease Prediction** — Random Forest model trained on UCI Cleveland dataset
-- **10-Year CHD Risk Assessment** — Framingham Heart Study-based prediction
-- **Cardiac Failure Prediction** — Gradient Boosting model on 70K+ patient records
-- **ECG Anomaly Detection** — Isolation Forest for detecting abnormal heartbeat patterns
-- **Interactive Dashboard** — React frontend with patient forms and visual results
+## Architecture
+Frontend → FastAPI backend → ML models
 
-## Tech Stack
+## Models Used
+- Random Forest
+- Logistic Regression
+- Isolation Forest (ECG)
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, Vite 5, React Router |
-| Backend | FastAPI, Uvicorn, Python 3.13 |
-| ML | scikit-learn, SHAP, joblib |
-| Data | pandas, NumPy, seaborn, matplotlib |
+## Datasets
+- Framingham dataset
+- Cardiac failure dataset
+- ECG signals dataset
+
+## Installation
+```bash
+pip install -r requirements.txt
+```
+
+## Run Backend
+```bash
+uvicorn backend.main:app --reload
+```
+
+## API Endpoints
+- /predict-heart
+- /predict-framingham
+- /predict-cardiac
+- /analyze-ecg
+
+## Validation
+10 clinical test cases used to validate model predictions.
+
+## Screenshots
+(Add screenshots)
+
+## Future Work
+- real-time wearable integration
+- hospital EHR integration
 
 ## Project Structure
-
 ```
 cardio-ai-platform/
 ├── backend/           # FastAPI application
@@ -38,6 +67,9 @@ cardio-ai-platform/
 ├── training/          # Model training scripts
 ├── notebooks/         # EDA & experiments
 ├── models/            # Saved .pkl models
+├── data/              # Raw & processed datasets
+├── docs/              # Architecture & dataset docs
+```
 ├── data/              # Raw & processed datasets
 └── docs/              # Architecture & dataset docs
 ```

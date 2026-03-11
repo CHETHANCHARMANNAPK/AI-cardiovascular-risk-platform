@@ -169,14 +169,16 @@ export default function RiskPrediction() {
       )}
       {error && <div className="error-msg">⚠️ {error}</div>}
 
-      {result && (
-        <div className="results-section">
-          {/* Only show the result for the selected model */}
-          {model === "heart" && <RiskCard result={result} model={model} modelInfo={info} />}
-          {model === "framingham" && <RiskCard result={result} model={model} modelInfo={info} />}
-          {model === "cardiac" && <RiskCard result={result} model={model} modelInfo={info} />}
-        </div>
-      )}
+        {/* Only show result for the selected model */}
+        {result && result.model === model && (
+          <div className="results-section">
+            <RiskCard
+              result={result}
+              modelInfo={info}
+              model={model}
+            />
+          </div>
+        )}
     </div>
   );
 }
