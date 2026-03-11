@@ -469,7 +469,7 @@ export default function PatientSummary() {
           <div className="rpt-card rpt-assessment">
             <h3>🤖 AI Cardiovascular Risk Assessment</h3>
             <div className="rpt-assess-grid">
-              {/* Only show non-heart results in summary */}
+              {/* Only show results for global summary, not individual pages */}
               <AssessRow label="10-Year CHD Risk" result={results.framingham} />
               <AssessRow label="Cardiac Failure Risk" result={results.cardiac} />
               <div className="rpt-assess-row">

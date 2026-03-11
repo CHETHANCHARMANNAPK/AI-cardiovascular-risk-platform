@@ -251,7 +251,7 @@ export default function GlobalRiskSummary() {
   const topFactors = mergeTopFactors(results);
 
   const models = [
-    { key: "heart", icon: "❤️", title: "Heart Disease Risk", errKey: "heartError" },
+    // Only show results for global summary, not individual pages
     { key: "framingham", icon: "📊", title: "Framingham 10-Year CHD", errKey: "framinghamError" },
     { key: "cardiac", icon: "🫀", title: "Cardiac Failure Risk", errKey: "cardiacError" },
     { key: "ecg", icon: "📈", title: "ECG Anomaly Detection", errKey: "ecgError", isEcg: true },
