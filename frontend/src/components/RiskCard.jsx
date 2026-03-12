@@ -146,7 +146,7 @@ export default function RiskCard({ result, modelInfo, model }) {
       </div>
 
       <div className="gauge-card">
-        <h4>🫀 Cardiovascular Risk Assessment</h4>
+        <h4>{modelInfo?.studyBox?.icon || "🫀"} {modelInfo?.title || "Cardiovascular Risk Assessment"}</h4>
         <div className="risk-gauge">
           <svg viewBox="0 0 200 120" className="gauge-svg">
             <path d="M 20,100 A 80,80 0 0,1 80,24" fill="none" stroke="#2ecc71" strokeWidth="14" strokeLinecap="round" opacity="0.25" />
