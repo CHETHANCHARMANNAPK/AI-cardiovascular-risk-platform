@@ -15,7 +15,7 @@
 
 ---
 
-## 📌 Overview
+## 1️⃣ Project Overview
 
 The **AI Cardiovascular Risk Platform** is a full-stack clinical decision support tool that uses **four trained machine learning models** to predict cardiovascular risk from patient data. It delivers explainable predictions using **SHAP**, visualises risk on interactive dashboards, and generates downloadable patient reports.
 
@@ -23,52 +23,39 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 
 ---
 
-## 🏗️ Architecture
+## 🚀 Live Demo
+
+Try the application here:
+
+[https://cardio-ai-platform.onrender.com](https://cardio-ai-platform.onrender.com) *(Update with your actual deployed link)*
+
+---
+
+## 🏗️ System Architecture Flow
 
 ```
-👤 User
-  │
-  ▼
-┌─────────────────────────────┐
-│   React Frontend (Vite)     │  http://localhost:5173
-│   Prediction Forms · Charts │
-│   ECG Monitor · Reports     │
-└──────────────┬──────────────┘
-               │  HTTP (Vite proxy → /api/*)
-               ▼
-┌─────────────────────────────┐
-│     FastAPI Backend         │  http://localhost:8000
-│   Preprocessing · SHAP      │
-│   Medical Rule Engine       │
-└──┬──────┬──────┬─────┬──────┘
-   │      │      │     │
-   ▼      ▼      ▼     ▼
-┌──────┐ ┌──────┐ ┌──────┐ ┌──────────┐
-│Heart │ │Fram. │ │Cardi.│ │   ECG    │
-│ RF   │ │  RF  │ │  GB  │ │Isolation │
-│Model │ │Model │ │Model │ │ Forest   │
-└──┬───┘ └──┬───┘ └──┬───┘ └────┬─────┘
-   └────────┴────────┴──────────┘
-                  │  SHAP Explanations
-                  ▼
-        ┌──────────────────┐
-        │ ⭐ Global Risk    │
-        │    Engine        │
-        │ 0.4×Heart +      │
-        │ 0.3×Framingham + │
-        │ 0.2×Cardiac +    │
-        │ 0.1×ECG          │
-        └────────┬─────────┘
-                 │
-                 ▼
-        📄 Risk Report + Recommendations
+User Input
+     │
+Frontend (React / Vite / CSS)
+     │
+Backend (FastAPI / Python)
+     │
+Models
+ ├─ Heart Disease Model
+ ├─ Framingham Risk Model
+ ├─ Cardiac Failure Model
+ ├─ ECG Anomaly Detector
+     │
+Global Risk Aggregation
+     │
+AI Clinical Recommendation Engine
 ```
 
 > See full diagram: [`docs/architecture.png`](docs/architecture.png)
 
 ---
 
-## ✨ Features
+## 2️⃣ Features
 
 | Feature | Description |
 |---------|-------------|
@@ -83,20 +70,59 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 
 ---
 
-## 🤖 Models & Performance
+## 3️⃣ AI Models Used
 
-| Model | Algorithm | Dataset | Accuracy | AUC-ROC |
-|-------|-----------|---------|----------|---------|
-| Heart Disease | Random Forest | UCI Cleveland (920 rows) | **86%** | **0.91** |
-| Framingham CHD | Random Forest | Framingham (3,660 rows) | **82%** | **0.83** |
-| Cardiac Failure | Gradient Boosting | CVD dataset (70K rows) | **74%** | **0.79** |
-| ECG Anomaly | Isolation Forest | PTB ECG Database | ~unsupervised | — |
+### Heart Disease Model
+- **Algorithm:** Random Forest Classifier
+- **Dataset:** UCI Heart Disease (Cleveland)
+- **Accuracy:** ~86%
+- **Predicts:** Presence of heart disease based on clinical parameters like chest pain, ECG, and max heart rate.
+
+### Framingham Risk Model
+- **Algorithm:** Random Forest Classifier (Based on Framingham Risk Score features)
+- **Dataset:** Framingham Heart Study
+- **Accuracy:** ~82%
+- **Predicts:** 10-year coronary heart disease (CHD) risk based on longitudinal factors like smoking, cholesterol, and age.
+
+### Cardiac Failure Model
+- **Algorithm:** Gradient Boosting Classifier
+- **Dataset:** Cardiovascular Disease dataset (70,000 records)
+- **Accuracy:** ~74%
+- **Predicts:** Likelihood of cardiac failure using combined cardiovascular measurements and demographics.
+
+### ECG Anomaly Detector
+- **Algorithm:** Isolation Forest
+- **Dataset:** PTB Diagnostic ECG Database
+- **Method:** Unsupervised detection of arrhythmias and shape abnormalities in digitized ECG signal timelines.
 
 > **Note:** Medical ML models are evaluated with **AUC-ROC** and **recall** (sensitivity) rather than raw accuracy, as cardiovascular datasets are typically imbalanced — missing a high-risk patient is far more costly than a false positive.
 
 ---
 
-## 🏥 Clinical Validation
+## 🛠 Tech Stack
+
+**Frontend**
+- HTML / Vanilla CSS
+- React (Vite)
+- JavaScript
+
+**Backend**
+- Python
+- FastAPI
+
+**Machine Learning**
+- Scikit-learn
+- Random Forest & Gradient Boosting
+- Isolation Forest
+- SHAP Explainability
+
+**Data & Mathematical Computing**
+- Pandas
+- NumPy
+
+---
+
+## 4️⃣ Architecture
 
 10 representative clinical scenarios were used to validate model output consistency:
 
@@ -115,7 +141,7 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 
 ---
 
-## 📸 Screenshots
+## 5️⃣ Screenshots
 
 | Homepage & Features | Clinical Data Input |
 | :---: | :---: |
@@ -174,7 +200,7 @@ cardio-ai-platform/
 
 ---
 
-## 🚀 Installation & Setup
+## 6️⃣ Installation & Setup
 
 ### Prerequisites
 
@@ -224,7 +250,7 @@ Frontend runs at: **http://localhost:5173**
 
 ---
 
-## 📡 API Reference
+## 7️⃣ Usage (API Reference)
 
 ### Heart Disease Prediction
 
@@ -314,7 +340,7 @@ See [`docs/dataset_description.md`](docs/dataset_description.md) for full detail
 
 ---
 
-## 🔮 Future Work
+## 8️⃣ Future Improvements
 
 - [ ] Real-time wearable device integration (Apple Watch / Fitbit)
 - [ ] Hospital EHR (Electronic Health Record) integration via FHIR API
@@ -325,7 +351,7 @@ See [`docs/dataset_description.md`](docs/dataset_description.md) for full detail
 
 ---
 
-## 📜 License
+## 9️⃣ License
 
 This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
 
