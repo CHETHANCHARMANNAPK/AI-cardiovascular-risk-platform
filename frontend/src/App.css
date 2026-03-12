@@ -2222,7 +2222,7 @@ body {
     print-color-adjust: exact;
   }
   .rpt-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
-  .rpt-assess-badge, .rpt-factor-bar {
+  .rpt-assess-badge, .rpt-factor-bar, .rpt-tl-bar, .rpt-tl-bar-wrap, .rpt-tl-badge {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
