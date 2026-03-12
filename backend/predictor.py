@@ -23,27 +23,17 @@ from .model_loader import framingham_model, heart_model, cardiac_model
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 def get_risk_label(probability: float) -> str:
-    """Convert a probability (0.0-1.0 scale) into a clinical risk category.
+    """Convert a probability (0-100 scale) into a clinical risk category.
 
     Thresholds
     ----------
-    * 0.00 – 0.30  →  ``"LOW"``
-    * 0.30 – 0.60  →  ``"MODERATE"``
-    * 0.60 – 1.00  →  ``"HIGH"``
-
-    Parameters
-    ----------
-    probability : float
-        Model output on a 0-1 scale.
-
-    Returns
-    -------
-    str
-        One of ``"LOW"``, ``"MODERATE"``, ``"HIGH"``.
+    * 0.0 – 30.0  →  ``"LOW"``
+    * 30.0 – 60.0  →  ``"MODERATE"``
+    * 60.0 – 100.0  →  ``"HIGH"``
     """
-    if probability >= 0.60:
+    if probability >= 60.0:
         return "HIGH"
-    if probability >= 0.30:
+    if probability >= 30.0:
         return "MODERATE"
     return "LOW"
 
@@ -291,8 +281,8 @@ def predict_heart(data):
     df = _to_df(data, HEART_FEATURES)
     prediction = int(heart_model.predict(df)[0])
     proba = heart_model.predict_proba(df)[0]
-    probability = round(float(proba[1]), 4)       # 0-1 scale
-    confidence  = round(float(max(proba)), 4)     # confidence = max class prob
+    probability = round(float(proba[1]) * 100, 2)  # 0-100 scale
+    confidence  = round(float(max(proba)) * 100, 2) # 0-100 scale
 
     # Stage 2 – risk label
     risk = get_risk_label(probability)
@@ -333,8 +323,8 @@ def predict_framingham(data):
     df = _to_df(data, FRAMINGHAM_FEATURES)
     prediction = int(framingham_model.predict(df)[0])
     proba = framingham_model.predict_proba(df)[0]
-    probability = round(float(proba[1]), 4)
-    confidence  = round(float(max(proba)), 4)
+    probability = round(float(proba[1]) * 100, 2)
+    confidence  = round(float(max(proba)) * 100, 2)
 
     risk = get_risk_label(probability)
 
@@ -375,8 +365,8 @@ def predict_cardiac(data):
     df = _to_df(data, CARDIAC_FEATURES)
     prediction = int(cardiac_model.predict(df)[0])
     proba = cardiac_model.predict_proba(df)[0]
-    probability = round(float(proba[1]), 4)
-    confidence  = round(float(max(proba)), 4)
+    probability = round(float(proba[1]) * 100, 2)
+    confidence  = round(float(max(proba)) * 100, 2)
 
     risk = get_risk_label(probability)
 

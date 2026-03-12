@@ -86,7 +86,7 @@ function estimateTimeline(probability) {
   return { current: +(current * 0.3).toFixed(1), fiveYear, tenYear };
 }
 
-export default function RiskCard({ result, modelInfo }) {
+export default function RiskCard({ result, modelInfo, model }) {
   const navigate = useNavigate();
   const [showConfTooltip, setShowConfTooltip] = useState(false);
 
@@ -95,8 +95,8 @@ export default function RiskCard({ result, modelInfo }) {
   const isPositive = result.prediction === 1;
   const probability = result.probability;
   if (probability == null) return <div className="risk-card"><p>No probability data available.</p></div>;
-  const explanation = result.explanation;
-  const contributions = explanation?.contributions;
+  const clinicalExplanation = result.explanation;
+  const contributions = result.shap_explanation?.contributions;
 
   const confidence = isPositive ? probability : 100 - probability;
   const topFactors = contributions ? Object.entries(contributions).slice(0, 5).map(([raw, val]) => [raw, val, friendlyName(raw)]) : [];

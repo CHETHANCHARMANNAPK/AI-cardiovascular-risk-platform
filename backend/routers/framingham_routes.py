@@ -36,6 +36,7 @@ def risk_prediction(data: FraminghamInput):
         result = predict_framingham(features)
         shap_explanation = explain_framingham(features)
         return {
+            "model":            "framingham",
             "prediction":       result["prediction"],
             "probability":      result["probability"],
             "confidence":       result["confidence"],

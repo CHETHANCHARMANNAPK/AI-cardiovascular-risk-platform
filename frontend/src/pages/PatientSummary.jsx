@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { predictHeart, predictCardiac, predictRisk, analyzeECG } from "../api/api";
+import RiskCard from "../components/RiskCard";
 
 const FRIENDLY = {
   Age: "Age Risk Factor", age: "Age Risk Factor",
@@ -426,23 +427,6 @@ export default function PatientSummary() {
                 <div className="rpt-info-item"><span className="rpt-info-icon">🚬</span><span className="rpt-info-label">Smoking</span><span className="rpt-info-value">{Number(form.currentSmoker) ? "Yes" : "No"}</span></div>
                 <div className="rpt-info-item"><span className="rpt-info-icon">🍷</span><span className="rpt-info-label">Alcohol</span><span className="rpt-info-value">{Number(form.alco) ? "Yes" : "No"}</span></div>
                 <div className="rpt-info-item"><span className="rpt-info-icon">🏃</span><span className="rpt-info-label">Active</span><span className="rpt-info-value">{Number(form.active) ? "Yes" : "No"}</span></div>
-              <div className="summary-results">
-                {/* Only show results for Framingham and Cardiac models */}
-                {results.framingham && results.framingham.model === "framingham" && (
-                  <RiskCard
-                    result={results.framingham}
-                    modelInfo={modelInfo?.framingham}
-                    model="framingham"
-                  />
-                )}
-                {results.cardiac && results.cardiac.model === "cardiac" && (
-                  <RiskCard
-                    result={results.cardiac}
-                    modelInfo={modelInfo?.cardiac}
-                    model="cardiac"
-                  />
-                )}
-              </div>
               </div>
             </div>
 

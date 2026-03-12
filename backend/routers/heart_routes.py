@@ -37,6 +37,7 @@ def heart_prediction(data: HeartInput):
         result = predict_heart(features)
         shap_explanation = explain_heart(features)
         return {
+            "model":            "heart",
             "prediction":       result["prediction"],
             "probability":      result["probability"],
             "confidence":       result["confidence"],

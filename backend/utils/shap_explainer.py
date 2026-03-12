@@ -45,8 +45,11 @@ def get_shap_explanation(model, input_data, feature_names):
         )
 
         ev = explainer.expected_value
-        if hasattr(ev, '__len__') and len(ev) > 1:
-            base = float(ev[1])
+        if hasattr(ev, '__len__'):
+            if len(ev) > 1:
+                base = float(ev[1])
+            else:
+                base = float(np.array(ev).item())
         else:
             base = float(ev)
 
