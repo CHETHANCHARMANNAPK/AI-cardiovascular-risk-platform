@@ -119,22 +119,22 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 
 | Homepage & Features | Clinical Data Input |
 | :---: | :---: |
-| ![Homepage](docs/screenshots/home.png) | ![Data Input](docs/screenshots/input_form.png) |
+| ![Homepage](docs/screenshots/cardioai_homepage.png) | ![Data Input](docs/screenshots/patient_data_input_dashboard.png) |
 
 | Heart Disease Prediction | Framingham 10-Yr Risk |
 | :---: | :---: |
-| ![Heart Model](docs/screenshots/heart_prediction.png) | ![Framingham Model](docs/screenshots/framingham_prediction.png) |
+| ![Heart Model](docs/screenshots/heart_disease_prediction_result.png) | ![Framingham Model](docs/screenshots/framingham_risk_prediction.png) |
 
 <div align="center">
   <b>Patient Cardiovascular AI Summary & Overall Risk Score</b><br>
-  <img src="docs/screenshots/overall_risk.png" alt="Overall Risk Score" width="80%">
+  <img src="docs/screenshots/global_cardiovascular_risk_summary.png" alt="Overall Risk Score" width="80%">
 </div>
 
 <br>
 
 <div align="center">
   <b>ECG Anomaly Detection & AI Patient Summary</b><br>
-  <img src="docs/screenshots/ecg_summary.png" alt="ECG and Summary" width="80%">
+  <img src="docs/screenshots/ecg_signal_anomaly_detection.png" alt="ECG and Summary" width="80%">
 </div>
 
 ---
