@@ -126,6 +126,13 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 | ![Heart Model](docs/screenshots/heart_prediction.png) | ![Framingham Model](docs/screenshots/framingham_prediction.png) |
 
 <div align="center">
+  <b>Patient Cardiovascular AI Summary & Overall Risk Score</b><br>
+  <img src="docs/screenshots/overall_risk.png" alt="Overall Risk Score" width="80%">
+</div>
+
+<br>
+
+<div align="center">
   <b>ECG Anomaly Detection & AI Patient Summary</b><br>
   <img src="docs/screenshots/ecg_summary.png" alt="ECG and Summary" width="80%">
 </div>
