@@ -52,7 +52,7 @@ app.include_router(cardiac_routes.router, tags=["Cardiac Failure"])
 app.include_router(framingham_routes.router, tags=["Framingham Risk"])
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def home():
     return {"message": "Cardio AI Platform Running"}
 
