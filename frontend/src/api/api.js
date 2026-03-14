@@ -1,4 +1,8 @@
-const API_BASE = "/api";
+// In production (Render), set VITE_API_BASE_URL to the backend service URL.
+// In development, falls back to "/api" which is proxied by Vite to localhost:8000.
+const API_BASE = import.meta.env.VITE_API_BASE_URL
+  ? import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "")
+  : "/api";
 
 async function apiRequest(url, options = {}) {
   const res = await fetch(url, options);

@@ -1,4 +1,5 @@
 import logging
+import os
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -28,10 +29,20 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={"detail": "An internal server error occurred. Please try again."}
     )
 
+# Read allowed origins from environment variable (comma-separated).
+# Falls back to wildcard so the API works even when CORS_ORIGINS is not set.
+_raw_origins = os.environ.get("CORS_ORIGINS", "*")
+if _raw_origins.strip() == "*":
+    _allow_origins = ["*"]
+    _allow_credentials = False          # credentials not allowed with wildcard
+else:
+    _allow_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+    _allow_credentials = True
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
-    allow_credentials=True,
+    allow_origins=_allow_origins,
+    allow_credentials=_allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
