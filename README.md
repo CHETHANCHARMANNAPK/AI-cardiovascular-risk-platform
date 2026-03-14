@@ -27,7 +27,7 @@ Cardiovascular disease causes **~18 million deaths annually** worldwide. Early d
 
 Try the application here:
 
-[https://cardio-ai-platform.onrender.com](https://cardio-ai-platform.onrender.com) *(Update with your actual deployed link)*
+[https://cardio-ai-frontend.onrender.com](https://cardio-ai-frontend.onrender.com)
 
 ---
 
