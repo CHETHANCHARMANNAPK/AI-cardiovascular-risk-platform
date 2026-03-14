@@ -57,7 +57,7 @@ def home():
     return {"message": "Cardio AI Platform Running"}
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     return {"status": "healthy", "version": "1.0.0"}
 
